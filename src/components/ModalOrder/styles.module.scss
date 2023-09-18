@@ -1,0 +1,80 @@
+.container {
+  width: 620px;
+  background-color: #ffffff;
+  color: var(--white);
+}
+
+.container h2 {
+  color: rgb(83, 83, 83);
+  margin: 1rem 0;
+}
+
+.table {
+  color: rgb(83, 83, 83);
+}
+
+.containerItem {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.total{
+    color: rgb(83, 83, 83);
+    margin-top: 26px;
+}
+
+.totalGeral{
+    font-size: 25px;
+    margin-top: 10px;
+    color: red;
+    font-weight: 600;
+}
+
+.tableRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #a8a6a6;
+}
+
+.tableCell {
+  color: rgb(83, 83, 83);
+  flex: 1;
+  padding: 0.4rem;
+}
+
+/* Estilos para o título das colunas */
+.tableRow:first-child {
+  border-bottom: 2px solid #ffa42d;
+}
+
+/* Adicione mais estilos conforme necessário */
+
+.description {
+  margin-top: 0.5rem;
+  // se chegar a descricao no final do modal quero que quebre pra linha de baix
+  word-break: break-all;
+}
+
+.buttonOrder {
+  margin-top: 1.5rem;
+  background-color: #ffa42d;
+  border: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.2rem;
+  color: var(--white-900);
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    width: 430px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .container {
+    width: 330px;
+  }
+}
