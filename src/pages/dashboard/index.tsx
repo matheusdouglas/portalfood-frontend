@@ -43,7 +43,7 @@ export type OrderItemProps = {
   };
 };
 
-export default function dashboard({ orders }: HomeProps) {
+export default function Dashboard({ orders }: HomeProps) {
   // Receber e colocar dentro de um estado.
 
   const [orderList, setOrderList] = useState(orders || []);
