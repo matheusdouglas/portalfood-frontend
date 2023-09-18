@@ -116,7 +116,7 @@ export default function Dashboard({ orders }: HomeProps) {
               <section key={item.id} className={styles.orderItem}>
                 <button onClick={() => handleOpenModalView(item.id)}>
                   <div className={styles.tag}></div>
-                  <span>Mesa {item.table} </span>
+                  <span>Pedido {item.table} </span>
                 </button>
               </section>
             ))}
