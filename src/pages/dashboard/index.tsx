@@ -35,6 +35,7 @@ export type OrderItemProps = {
     price: number;
     banner: string;
   };
+  
   order: {
     id: string;
     table: string | null;
@@ -132,18 +133,37 @@ export default function Dashboard({ orders }: HomeProps) {
           />
         )}
       </div>
+      <div>
+      <table>
+  <thead>
+    <tr>
+      <th>ID do Pedido</th>
+      <th>Número do Pedido</th>
+      <th>Detalhes</th>
+    </tr>
+  </thead>
+  <tbody>
+    {orderList.map((item) => (
+      <tr key={item.id}>
+        <td>{item.id}</td>
+        <td>{item.table}</td>
+        <td>
+          <button onClick={() => handleOpenModalView(item.id)}>
+            <i className="fa fa-search"></i> 
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+      </div>
     </>
   );
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
-  const apiClient = setupAPIClient(ctx);
-
-  const response = await apiClient.get("/orders");
-
   return {
-    props: {
-      orders: response.data,
-    },
-  };
-});
+    props: {}
+  }
+})

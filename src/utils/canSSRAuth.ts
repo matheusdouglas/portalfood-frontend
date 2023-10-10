@@ -1,7 +1,7 @@
 import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { parseCookies, destroyCookie } from 'nookies'
 import { AuthTokenError } from '../services/errors/AuthTokenError'
-// import  { NaoAutorizado } from '../pages/category/Unhatorized'
+// limport  { NaoAutorizado } from '../pages/category/Unhatorized'
 // funcao para paginas que so users logados podem ter acesso
 
 export function canSSRAuth<P>(fn: GetServerSideProps<P>) {

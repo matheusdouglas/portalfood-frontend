@@ -1,7 +1,8 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useContext, useEffect } from "react";
 import Head from "next/head";
 import styles from "./styles.module.scss";
 import { Header } from "../../components/Header/index";
+import Image from 'next/image';
 
 import { canSSRAuth } from "../../utils/canSSRAuth";
 
@@ -9,6 +10,10 @@ import { FiUpload } from "react-icons/fi";
 import { setupAPIClient } from "../../services/api";
 
 import { toast } from "react-toastify";
+
+import { useRouter } from "next/router";
+import { AuthContext } from '../../contexts/AuthContext';
+
 
 type ItemProps = {
   id: string;
@@ -20,6 +25,21 @@ interface CategoryProps {
 }
 
 export default function Product({ categoryList }: CategoryProps) {
+
+
+  const { user } = useContext(AuthContext);
+  const isAdmin = user?.is_admin;
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isAdmin) {
+      router.push('/unhatorized'); // Redirecionar para página de acesso negado
+    }
+  }, [isAdmin, router]);
+
+
+
+
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -30,6 +50,24 @@ export default function Product({ categoryList }: CategoryProps) {
   //caso acesse essa pagina e nao tem nenhuma categoria
   const [categories, setCategories] = useState(categoryList || []);
   const [categorySelected, setCategorySelected] = useState(0);
+
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const apiClient = setupAPIClient();
+        const response = await apiClient.get("/category");
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar categorias:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+
+
 
   function handleFile(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) {
@@ -61,7 +99,7 @@ export default function Product({ categoryList }: CategoryProps) {
       const data = new FormData();
 
       if (name === "" || price === "" || description === "") {
-        toast.error("Preencha todos os campos");
+        toast.warning("Preencha todos os campos");
         return;
       }
 
@@ -111,17 +149,18 @@ export default function Product({ categoryList }: CategoryProps) {
               />
 
               {AvatarUrl && (
-                <img
-                  className={styles.preview}
-                  src={AvatarUrl}
-                  alt="Foto do produto"
-                  width={250}
-                  height={250}
-                />
+                
+             <Image
+             className={styles.preview}
+             src={AvatarUrl}
+             alt="Foto do produto"
+             width={250}
+             height={250}
+           />
               )}
             </label>
 
-            <label className={styles.tags}>Categorias</label>
+            <label className={styles.tags}>Categorias:</label>
             <select value={categorySelected} onChange={handleChangeCategory}>
               {categories.map((item, index) => {
                 return (
@@ -132,7 +171,7 @@ export default function Product({ categoryList }: CategoryProps) {
               })}
             </select>
 
-            <label className={styles.tags}>Nome do Produto</label>
+            <label className={styles.tags}>Produto:</label>
             <input
               type="text"
               placeholder="Digite o nome do produto"
@@ -141,7 +180,7 @@ export default function Product({ categoryList }: CategoryProps) {
               onChange={(e) => setName(e.target.value)}
             />
 
-            <label className={styles.tags}>Preço</label>
+            <label className={styles.tags}>Preço:</label>
             <input
               type="text"
               placeholder="Digite o Preço"
@@ -150,7 +189,7 @@ export default function Product({ categoryList }: CategoryProps) {
               onChange={(e) => setPrice(e.target.value)}
             />
 
-            <label className={styles.tags}>Descrição</label>
+            <label className={styles.tags}>Descrição:</label>
             <textarea
               placeholder="Descreva seu produto..."
               className={styles.input}
@@ -169,13 +208,7 @@ export default function Product({ categoryList }: CategoryProps) {
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
-  const apiClient = setupAPIClient(ctx);
-
-  const response = await apiClient.get("/category");
-
   return {
-    props: {
-      categoryList: response.data,
-    },
-  };
-});
+    props: {}
+  }
+})
