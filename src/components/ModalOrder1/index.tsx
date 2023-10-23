@@ -1,5 +1,5 @@
 import Modal from "react-modal";
-import styles from "./styles.module.scss";
+import styles from "../ModalOrder/styles.module.scss"
 
 import { FiX } from "react-icons/fi";
 import { OrderItemProps } from "../../pages/dashboard";
@@ -52,10 +52,6 @@ export function ModalOrder({
         <h2>
           <strong>Detalhes do pedido</strong>
         </h2>
-        <span className={styles.table}>
-          Matricula: <strong>{order[0].order.table}</strong>
-        </span>
-
         <section className={styles.containerItem}>
           <div className={styles.tableRow}>
             <div className={styles.tableCell}>
@@ -96,13 +92,6 @@ export function ModalOrder({
             {calcularTotalGeral()}
           </div>
         </section>
-
-        <button
-          className={styles.buttonOrder}
-          onClick={() => handleFinishOrder(order[0].order_id)}
-        >
-          Concluir Pedido
-        </button>
       </div>
     </Modal>
   );

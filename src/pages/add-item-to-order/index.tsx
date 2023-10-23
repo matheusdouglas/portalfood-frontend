@@ -70,7 +70,7 @@ const AddItemToOrder = () => {
     try {
       const apiClient = setupAPIClient();
       const response = await apiClient.get(
-        `/category/product?category=${category}`
+        `/category/product?category_id=${category}`
       );
       setProducts(response.data);
     } catch (error) {

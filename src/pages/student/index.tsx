@@ -30,6 +30,12 @@ function App() {
   };
 
   const handleCadastroClick = async () => {
+
+    if (studentName === '') {
+      toast.warning("prencha todos os campos")
+      return;
+    }
+
     try {
       const apiClient = setupAPIClient();
       const response = await apiClient.post('/student', {

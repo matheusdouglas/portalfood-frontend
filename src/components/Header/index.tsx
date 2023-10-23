@@ -27,6 +27,8 @@ export function Header() {
 
         <nav className={styles.menuNav}>
 
+          <Link href="/consulta">Consultas</Link>   
+
           <Link href="/student">Aluno</Link>
 
           <Link href="/order">Pedido</Link>

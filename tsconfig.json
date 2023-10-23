@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/components/ModalOrder1"  ],
   "exclude": [
     "node_modules"
   ]

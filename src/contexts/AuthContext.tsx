@@ -102,7 +102,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       toast.success("Logado com sucesso");
 
-      Router.push("/dashboard");
+      Router.push("/consulta");
     } catch (err) {
       toast.error("Erro ao acessar");
       console.log("erro ao acessar", err);

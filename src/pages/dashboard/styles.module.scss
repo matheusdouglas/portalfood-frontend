@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
 
+
 }
 
 
@@ -29,17 +30,19 @@
 .listOrders {
     display: flex;
     flex-direction: row;
-    background-color: var(--dark-900);
+    background-color: var(#fff);
     margin-bottom: 1rem;
     align-items: center;
     border-radius: 0.3rem;
+    margin-left: 0px;
+
 
     button {
 
         border: 0;
         background: transparent;
         font-size: 1.2rem;
-        color: white;
+        color: black;
         height: 60px;
         align-items: center;
         display: flex;
@@ -52,10 +55,16 @@
     height: 60px;
     border-radius: 0.3rem 0 0 0.3rem;
     margin-right: 1rem;
+    
 }
 
 .emptyList{
     color: rgb(85, 85, 85);
     font-size: 1.2rem;
+    
+}
+
+.orderItem {
+    padding: 10px;
     
 }

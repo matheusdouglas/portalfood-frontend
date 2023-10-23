@@ -16,7 +16,7 @@ const AccessDeniedPage = () => {
           height={600}
         />
       </div>
-      <Link href="/" className={styles.link}>
+      <Link href="/consulta" className={styles.link}>
         Voltar para a página inicial
       </Link>
     </div>
