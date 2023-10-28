@@ -115,30 +115,36 @@ const MyTable = () => {
   return (
     <div>
       <Header />
-      <TableContainer style={{ maxHeight: "800px", overflowY: "auto" }}>
+      <TableContainer style={{ maxHeight: "100vh", overflowY: "auto" }} >
         <div className={styles.container}>
           <Input
             type="date"
             value={dataInicial}
             onChange={(e) => setDataInicial(e.target.value)}
             placeholder="Data Inicial"
-            width={300}
+            width={['100%', '100%', '100%', '300px']}
             focusBorderColor="yellow.400"
-          />
+            mb={2}
+            mr={2}
+                    />
           <Input
             type="date"
             value={dataFinal}
             onChange={(e) => setDataFinal(e.target.value)}
             placeholder="Data Final"
-            width={300}
+            width={['100%', '100%', '100%', '300px']}
             focusBorderColor="yellow.400"
+            mr={2}
           />
           <Select
             value={aluno}
             onChange={(e) => setAluno(e.target.value)}
             placeholder="Aluno"
-            width={300}
+            width={['100%', '100%', '100%', '300px']}
             focusBorderColor="yellow.400"
+            mb={2}
+            mr={2}
+            
           >
             {alunos.map((student) => (
               <option key={student.id} value={student.id}>
@@ -146,40 +152,36 @@ const MyTable = () => {
               </option>
             ))}
           </Select>
-        </div>
-        <div className={styles.button}>
-          <IconButton
-            onClick={handlePesquisa}
-            icon={<Icon as={FaSearch} />}
-            aria-label="Pesquisar"
-            width={300}
-            mr={12}
-            colorScheme="red"
-          />
-          <IconButton
-            onClick={handleLimparPesquisa}
-            icon={<Icon as={FaTimes} />}
-            aria-label="Limpar Pesquisa"
-            width={300}
-          />
+
           <Input
             type="text"
             placeholder="Filtrar por nome do pedido"
             value={filtro}
             onChange={(e) => setFiltro(e.target.value)}
-            width={300}
+            width={['100%', '100%', '100%', '300px']}
             focusBorderColor="yellow.400"
-            className={styles.buttonP}
-        
+            mr={2}
+          />    
 
+          <IconButton
+            onClick={handlePesquisa}
+            icon={<Icon as={FaSearch} />}
+            aria-label="Pesquisar"
+            width={['100%', '100%', '100%', '300px']}
+            colorScheme="red"
+            mr={2}
+          />
+          <IconButton
+            onClick={handleLimparPesquisa}
+            icon={<Icon as={FaTimes} />}
+            aria-label="Limpar Pesquisa"
+            width={['100%', '100%', '100%', '300px']}
           />
         </div>
         {/* @ts-ignore */}
         <Table
           variant="striped"
           colorScheme="gray"
-          width={1000}
-          ml={500}
           mt={10}
         >
              {/* @ts-ignore */}

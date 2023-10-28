@@ -1,12 +1,13 @@
 .container{ 
     display: flex;
-    justify-content: space-between;
-    margin-top: 100px;
-    padding: 0px 400px 0px 510px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 80px;
+    padding-left: 20px;
+    
 }
 
 .button {
-    padding: 0px 400px 0px 510px;
     margin-top: 20px;
 }
 
