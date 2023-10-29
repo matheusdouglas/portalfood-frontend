@@ -12,10 +12,7 @@ export function Header() {
   const isAdmin = user?.is_admin;
 
   // Defina os links que você deseja exibir no cabeçalho com base nas permissões
-  const headerLinks = [
-    { href: "/consulta", label: "Consultas" },
-    { href: "/student", label: "Aluno" },
-  ];
+  const headerLinks = [];
 
   // Adicione links adicionais se o usuário for administrador
   if (isAdmin) {
@@ -25,6 +22,11 @@ export function Header() {
       { href: "/category", label: "Categoria" },
       { href: "/product", label: "Produto" }
     );
+  } else {
+     headerLinks.push(
+      { href: "/consulta", label: "Consultas" },
+      { href: "/student", label: "Aluno" },
+     )
   }
 
   return (
@@ -36,7 +38,7 @@ export function Header() {
 
         <nav className={styles.menuNav}>
           {headerLinks.map((link, index) => (
-            <Link key={index} href={link.href}>
+            <Link key={index} href={link.href} className={styles.l}>
               {link.label}
             </Link>
           ))}

@@ -13,16 +13,6 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 const CreateOrderForm = () => {
 
-  const { user } = useContext(AuthContext);
-  const isAdmin = user?.is_admin;
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isAdmin) {
-      router.push('/unhatorized'); // Redirecionar para página de acesso negado
-    }
-  }, [isAdmin, router]);
-
 
   const [formData, setFormData] = useState({
     table: 0,
@@ -38,6 +28,7 @@ const CreateOrderForm = () => {
       try {
         const apiClient = setupAPIClient();
         const response = await apiClient.get("/student");
+        console.log(response.data); 
         setStudents(response.data);
       } catch (error) {
         console.error("Erro ao buscar a lista de estudantes:", error);
@@ -126,10 +117,10 @@ const CreateOrderForm = () => {
               onChange={handleStudentChange}
               className={styles.select}
             >
-              <option value="">Selecione um estudante</option>
+              <option value="">Selecione um Aluno</option>
               {students.map((student) => (
                 <option key={student.id} value={student.id}>
-                  {student.name}
+                  {`${student.name} - ${student.plate}`}
                 </option>
               ))}
             </select>

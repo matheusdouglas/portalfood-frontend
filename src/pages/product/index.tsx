@@ -11,9 +11,6 @@ import { setupAPIClient } from "../../services/api";
 
 import { toast } from "react-toastify";
 
-import { useRouter } from "next/router";
-import { AuthContext } from '../../contexts/AuthContext';
-
 
 type ItemProps = {
   id: string;
@@ -25,18 +22,6 @@ interface CategoryProps {
 }
 
 export default function Product({ categoryList }: CategoryProps) {
-
-
-  const { user } = useContext(AuthContext);
-  const isAdmin = user?.is_admin;
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isAdmin) {
-      router.push('/unhatorized'); // Redirecionar para página de acesso negado
-    }
-  }, [isAdmin, router]);
-
 
 
 

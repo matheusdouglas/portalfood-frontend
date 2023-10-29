@@ -8,22 +8,10 @@ import { toast } from 'react-toastify'
 
 import { canSSRAuth } from '../../utils/canSSRAuth'
 
-import { useContext, useEffect } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
-import { useRouter } from 'next/router';
 
 
 export default function Category() {
 
-  const { user } = useContext(AuthContext);
-  const isAdmin = user?.is_admin;
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isAdmin) {
-      router.push('/unhatorized'); // Redirecionar para página de acesso negado
-    }
-  }, [isAdmin, router]);
 
   const [name, setName] = useState('')
   const [errorMessage, setErrorMessage] = useState(""); 

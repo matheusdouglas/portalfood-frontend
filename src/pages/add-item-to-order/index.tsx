@@ -5,22 +5,8 @@ import styles from "./styles.module.scss";
 import { toast } from "react-toastify";
 
 
-import { AuthContext } from '../../contexts/AuthContext';
-import { useRouter } from 'next/router';
-
-
 const AddItemToOrder = () => {
   
-  const { user } = useContext(AuthContext);
-  const isAdmin = user?.is_admin;
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isAdmin) {
-      router.push('/unhatorized'); // Redirecionar para página de acesso negado
-    }
-  }, [isAdmin, router]);
-
 
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");

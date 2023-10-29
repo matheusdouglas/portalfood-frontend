@@ -39,6 +39,8 @@ type SignUpProps = {
 export const AuthContext = createContext({} as AuthContextData);
 
 export function signOut() {
+
+
   try {
     destroyCookie(undefined, "@nextauth.token");
     Router.push("/");
@@ -49,7 +51,9 @@ export function signOut() {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserProps>();
-  const isAuthenticated = !!user; // vai converter a variavel do user em bollean
+  const isAuthenticated = !!user; // vai converter a variavel do user em bolle
+
+
 
   useEffect(() => {
     // tentar pegar algo no cokkie que eo token
@@ -102,7 +106,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       toast.success("Logado com sucesso");
 
-      Router.push("/consulta");
+      if (is_admin) {
+        Router.push("/dashboard"); // Redireciona para a rota de administrador
+      } else {
+        Router.push("/consulta"); // Redireciona para a rota de usuário comum
+      }
+
     } catch (err) {
       toast.error("Erro ao acessar");
       console.log("erro ao acessar", err);
