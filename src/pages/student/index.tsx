@@ -56,8 +56,8 @@ function App() {
         toast.error("Erro ao cadastrar aluno");
       }
     } catch (error) {
-      console.error("Erro ao cadastrar aluno", error);
-      toast.error("Erro ao cadastrar aluno");
+        const erroCreatedStudent = error.response.data.error;
+        toast.error(erroCreatedStudent)
     }
   };
 

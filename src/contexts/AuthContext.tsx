@@ -84,41 +84,50 @@ export function AuthProvider({ children }: AuthProviderProps) {
         email,
         password,
       });
-      //   console.log(response.data)
-
-      const { id, name, token, is_admin } = response.data;
-
-      setCookie(undefined, "@nextauth.token", token, {
-        maxAge: 60 * 60 * 24 * 30,
-        path: "/", // expira em um mes
-      });
-
-      setUser({
-        id,
-        name,
-        email,
-        is_admin
-      });
-
-      // passar para proximas requisicoes nosso token
-
-      api.defaults.headers["Authorization"] = `Bearer ${token}`;
-
-      toast.success("Logado com sucesso");
-
-      if (is_admin) {
-        Router.push("/dashboard"); // Redireciona para a rota de administrador
+  
+      if (response.status === 200) {
+        // Sucesso: o usuário foi autenticado com êxito
+        const { id, name, token, is_admin } = response.data;
+  
+        setCookie(undefined, "@nextauth.token", token, {
+          maxAge: 60 * 60 * 24 * 30,
+          path: "/", // expira em um mês
+        });
+  
+        setUser({
+          id,
+          name,
+          email,
+          is_admin
+        });
+  
+        // passar para próximas requisições nosso token
+  
+        api.defaults.headers["Authorization"] = `Bearer ${token}`;
+  
+        toast.success("Logado com sucesso");
+  
+        if (is_admin) {
+          Router.push("/dashboard"); // Redireciona para a rota de administrador
+        } else {
+          Router.push("/consulta"); // Redireciona para a rota de usuário comum
+        }
       } else {
-        Router.push("/consulta"); // Redireciona para a rota de usuário comum
+        // O servidor retornou um status inesperado
+        toast.error("Erro ao acessar");
       }
-
-    } catch (err) {
-      toast.error("Erro ao acessar");
-      console.log("erro ao acessar", err);
+    } catch (error) {
+      if (error.response) {
+        // Erro com resposta do servidor
+        const errorMessage = error.response.data.error;
+        toast.error(errorMessage);
+      } else {
+        // Erro sem resposta do servidor
+        toast.error("Erro ao acessar");
+      }
     }
-
-    //redirecionar o user para o /dashboard
   }
+  
 
   async function signUp({ name, email, password }: SignUpProps) {
     try {
@@ -127,12 +136,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
         email,
         password,
       });
+         
+      if(response.status === 200){
+        toast.success("Conta criada com sucesso");
+        Router.push("/");
+      }else {
+       toast.error("Erro ao criar conta");
+      }
 
-      toast.success("Conta criada com sucesso");
-
-      Router.push("/");
-    } catch (err) {
-      toast.error("Erro ao cadastrar");
+    } catch (error) {
+         const errorMessage = error.response.data.error;
+         toast.error(errorMessage)
     }
   }
 
