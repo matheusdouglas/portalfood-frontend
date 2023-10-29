@@ -92,7 +92,8 @@ const AddItemToOrder = () => {
         id: response.data.id, // ID do item
         product_id: selectedProduct,
         amount: quantity,
-        product_name: selectedProductObject.name, // Nome do produto
+        product_name: selectedProductObject.name,
+        product_price : selectedProductObject.price
       };
       setAddedItems([...addedItems, newItem]);
 
@@ -234,6 +235,7 @@ const AddItemToOrder = () => {
                   <li key={item.id}>
                     Produto: <strong>{item.product_name}</strong>
                     Quantidade: <strong>{item.amount}</strong>
+                    Total R$: <strong> {item.product_price * item.amount}</strong>
                     <button onClick={() => handleRemoveItem(item.id)}>
                       Remover
                     </button>
