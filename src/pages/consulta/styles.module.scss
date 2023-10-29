@@ -1,18 +1,20 @@
 .container{ 
+    max-width: 1000px;
+    margin: 5rem auto;
+    padding: 0 1rem;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 80px;
-    padding-left: 20px;
-    
+    justify-content: space-between;
+    flex-direction: column;
 }
 
-.button {
-    margin-top: 20px;
+
+.groupButton {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
-.buttonP {
+.search {
     display: flex;
-    margin-top: 20px;
-    
+    justify-content: space-between;
 }
