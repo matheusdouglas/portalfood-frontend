@@ -56,6 +56,7 @@ const MyTable = () => {
         return;
       }
 
+
       const apiClient = setupAPIClient();
       const response = await apiClient.get(
         `/order/detail/student?student_id=${aluno}`

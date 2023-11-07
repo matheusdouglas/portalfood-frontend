@@ -83,7 +83,7 @@ export function ModalOrder({
               <div className={styles.tableCell}>{item.product.price}</div>
               <div className={styles.tableCell}>
                 <label>R$ </label>
-                {item.product.price * item.amount}
+                {Number((item.product.price * item.amount)).toFixed(2)}
               </div>
             </div>
           ))}

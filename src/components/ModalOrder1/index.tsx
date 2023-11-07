@@ -37,6 +37,8 @@ export function ModalOrder({
     return totalGeral.toFixed(2);
   };
 
+
+
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
       <button
@@ -79,7 +81,7 @@ export function ModalOrder({
               <div className={styles.tableCell}>{item.product.price}</div>
               <div className={styles.tableCell}>
                 <label>R$ </label>
-                {item.product.price * item.amount}
+                {Number((item.product.price * item.amount)).toFixed(2)}
               </div>
             </div>
           ))}
