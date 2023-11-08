@@ -235,7 +235,7 @@ const AddItemToOrder = () => {
                   <li key={item.id}>
                     Produto: <strong>{item.product_name}</strong>
                     Quantidade: <strong>{item.amount}</strong>
-                    Total R$: <strong> {Number((item.product.price * item.amount)).toFixed(2)}</strong>
+                    Total R$: <strong> {item.product.price * item.amount}</strong>
                     <button onClick={() => handleRemoveItem(item.id)}>
                       Remover
                     </button>
